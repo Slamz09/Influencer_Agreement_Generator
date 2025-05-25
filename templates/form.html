@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Influencer Agreement Form</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2rem; }
+    label { display: block; margin-bottom: .5rem; }
+    input, textarea { width: 100%; padding: .4rem; margin-bottom: 1rem; }
+    button { padding: .6rem 1.2rem; font-size: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Create Influencer Agreement</h1>
+  <form action="/generate" method="post">
+    <label>Hotel Entity Name:
+      <input name="hotel_entity_name" required>
+    </label>
+
+    <label>Influencer Name:
+      <input name="influencer_name" required>
+    </label>
+
+    <label>Nights:
+      <input type="number" name="nights" required>
+    </label>
+
+    <label>Accommodation Dates:
+      <input name="accommodation_dates" required>
+    </label>
+
+    <label>Room Types:
+      <input name="room_types" required>
+    </label>
+
+    <label>Check-In Time:
+      <input type="Time" name="check_in_time" required>
+    </label>
+
+   <label>Check-In Date:
+	<input type="date" name="check_in_date" required>
+	</label>
+
+    <label>Check-Out Time:
+      <input type="Time" name="check_out_time" required>
+    </label>
+
+    <label>Check-Out Date:
+      <input type="date" name="check_out_date" required>
+    </label>
+
+    <label>Social Media Handles:
+      <input name="social_media_handles" required>
+    </label>
+
+    <label>Term Dates:
+      <input name="term_dates" required>
+    </label>
+
+    <label>Hotel Name:
+      <input name="hotel_name" required>
+    </label>
+
+    <label>Hotel Address:
+      <input name="hotel_address" required>
+    </label>
+
+    <label>Program Name:
+      <input name="program_name" required>
+    </label>
+
+    <label>Min Posts Per Day:
+      <input type="Number" name="min_posts_per_day" required>
+    </label>
+
+    <label>Pre-Post Days (optional):
+      <input type="Number" name="pre_post_days">
+    </label>
+
+    <label>Hotel Handle:
+      <input name="hotel_handle" required>
+    </label>
+
+    <label>Brand Handle:
+      <input name="brand_handle" required>
+    </label>
+
+    <label>Company Handle:
+      <input name="company_handle" required>
+    </label>
+
+    <label>Campaign Hashtag:
+      <input name="campaign_hashtag" required>
+    </label>
+
+    <label>Confidentiality Term (Years):
+      <input name="conf_years" required>
+    </label>
+
+    <button type="submit">Generate Word Doc</button>
+  </form>
+</body>
+</html>
+
