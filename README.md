@@ -13,10 +13,8 @@
    * Click **"Install Now"**
 
 To check it's installed:
-
 * Open the **Command Prompt** (type `cmd` in Start Menu)
 * Type:
-
   ``power shell
   python --version
   ```
@@ -41,8 +39,7 @@ To check it's installed:
 | `templates/form.html` *(optional)*   | HTML form (if not using inline string) |
 ---
 
-## ✅ 3. **Create Your Project Folder and Project Files**
-
+## ✅ 3. **Activate it**
 * On Windows:
 
   ```powershell
