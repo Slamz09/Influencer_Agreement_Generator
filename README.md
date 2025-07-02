@@ -13,7 +13,6 @@
 To check it's installed:
 * Open the **Command Prompt** (type `cmd` in Start Menu)
 * Type:
-  ```
 `Powershell`
    ```
   python --version
