@@ -1,26 +1,9 @@
 
 ---
 
-## ✅ 1. **Install Python and Visual Studio Code (VS Code) or Notepad ++ ** *(Optional but recommended)**
+## **Installations needed: Python, Visual Studio Code (VS Code) or Notepad ++ ** *(Optional but recommended)**
 
-🔹 On Windows:
-1. Go to: [https://www.python.org/downloads](https://www.python.org/downloads)
-2. Click "Download Python 3.x.x"
-3. Open the installer:
-   * **IMPORTANT**: Check the box that says **"Add Python to PATH"**
-   * Click **"Install Now"**
-
-To check it's installed:
-* Open the **Command Prompt** (type `cmd` in Start Menu)
-* Type:
-`Powershell`
-   ```
-  python --version
-  ```
-  You should see something like: `Python 3.12.x`
----
-
-## ✅ 2. **Create Your Project Folder and Project Files**
+## ✅ 1. **Create Your Project Folder and Project Files**
 
 1. Create the project folder, e.g.:
 
@@ -38,7 +21,7 @@ To check it's installed:
 ---
 ```
 
-## ✅ 3. **Activate it**
+## ✅ 2. **Activate it**
 
 * Powershell:
 
