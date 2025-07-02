@@ -1,7 +1,7 @@
 
 ---
 
-## ✅ 1. **Install Python**
+## ✅ 1. **Install Python and Visual Studio Code (VS Code) or Notepad ++ ** *(Optional but recommended)**
 
 🔹 On Windows:
 
@@ -23,9 +23,7 @@ To check it's installed:
   You should see something like: `Python 3.12.x`
 ---
 
-## ✅ 2. **Install Visual Studio Code (VS Code) or Notepad ++ ** *(Optional but recommended)*
-
-## ✅ 3. **Create Your Project Folder and Project Files**
+## ✅ 2. **Create Your Project Folder and Project Files**
 
 1. Create the project folder, e.g.:
 
@@ -43,22 +41,11 @@ To check it's installed:
 | `templates/form.html` *(optional)*   | HTML form (if not using inline string) |
 ---
 
-## ✅ 5. **Create and Activate Virtual Environment (Recommended)**
-
-Open **Command Prompt** or **VS Code terminal** in your project folder:
-
-```bash
-cd C:\Users\YourName\Documents\Influencer_Agreement_Generator
-python -m venv venv
-```
-
-## ✅ 4. **Activate it**
+## ✅ 3. **Create Your Project Folder and Project Files**
 
 * On Windows:
 
   ```powershell
   cd C:\Users\slamb\PythonProjects\Influencer_Agreement_Generator
   python .\influencer_app.py
-  ```
 
----
