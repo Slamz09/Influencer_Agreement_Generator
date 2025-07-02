@@ -13,7 +13,7 @@
 To check it's installed:
 * Open the **Command Prompt** (type `cmd` in Start Menu)
 * Type:
-  ``power shell
+* power shell
    ```
   python --version
   ```
@@ -40,7 +40,7 @@ To check it's installed:
 
 ## ✅ 3. **Activate it**
 
-* On Windows:
+* Powershell:
 
   ```powershell
   cd C:\Users\slamb\PythonProjects\Influencer_Agreement_Generator
