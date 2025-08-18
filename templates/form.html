@@ -1,104 +1,314 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Influencer Agreement Form</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 2rem; }
-    label { display: block; margin-bottom: .5rem; }
-    input, textarea { width: 100%; padding: .4rem; margin-bottom: 1rem; }
-    button { padding: .6rem 1.2rem; font-size: 1rem; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Influencer Agreement Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #333; text-align: center; margin-bottom: 30px; }
+        .form-group { margin-bottom: 20px; }
+        label {
+            display: block; margin-bottom: 5px; font-weight: bold; color: #555;
+        }
+        input[type="text"], input[type="date"], input[type="time"], input[type="number"], select, textarea {
+            width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 16px; box-sizing: border-box;
+        }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: #4CAF50; }
+        textarea { height: 60px; resize: vertical; }
+        .submit-btn {
+            background-color: #4CAF50; color: white; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer;
+            font-size: 18px; width: 100%; margin-top: 20px;
+        }
+        .submit-btn:hover { background-color: #45a049; }
+        .address-field, .legal-field { background-color: #f9f9f9; color: #666; }
+        .auto-fill-note { font-size: 12px; color: #888; margin-top: 5px; }
+    </style>
 </head>
 <body>
-  <h1>Create Influencer Agreement</h1>
-  <form action="/generate" method="post">
-    <label>Hotel Entity Name:
-      <input name="hotel_entity_name" required>
-    </label>
+<div class="form-container">
+    <h1>Influencer Agreement Generator</h1>
 
-    <label>Influencer Name:
-      <input name="influencer_name" required>
-    </label>
+    <form method="POST" action="/generate">
+        <!-- Influencer -->
+        <div class="form-group">
+            <label for="influencer_name">Influencer Name:</label>
+            <input type="text" id="influencer_name" name="influencer_name" required>
+        </div>
 
-    <label>Nights:
-      <input type="number" name="nights" required>
-    </label>
+        <!-- Hotel selector -->
+        <div class="form-group">
+            <label for="hotel_name">Hotel Name:</label>
+            <select id="hotel_name" name="hotel_name" required onchange="updateHotelFields()">
+                <option value="">Select a hotel...</option>
+                <option value="Sonesta Redondo Beach & Marina">Sonesta Redondo Beach & Marina</option>
+                <option value="The Allegro Royal Sonesta Hotel">The Allegro Royal Sonesta Hotel</option>
+                <option value="The Clift Royal Sonesta Hotel">The Clift Royal Sonesta Hotel</option>
+                <option value="Royal Sonesta Chicago Riverfront">Royal Sonesta Chicago Riverfront</option>
+                <option value="Royal Sonesta Chicago River North">Royal Sonesta Chicago River North</option>
+                <option value="Sonesta Hamilton Park Morristown">Sonesta Hamilton Park Morristown</option>
+                <option value="Sonesta Simply Suites Jersey City">Sonesta Simply Suites Jersey City</option>
+                <option value="Sonesta Simply Suites Parsippany Morris Plains">Sonesta Simply Suites Parsippany Morris Plains</option>
+                <option value="Sonesta ES Suites Parsippany Morris Plains">Sonesta ES Suites Parsippany Morris Plains</option>
+                <option value="Sonesta Simply Suites Nanuet">Sonesta Simply Suites Nanuet</option>
+                <option value="The Yorkville Royal Sonesta Hotel">The Yorkville Royal Sonesta Hotel</option>
+                <option value="Sonesta ES Suites Toronto">Sonesta ES Suites Toronto</option>
+                <option value="Royal Sonesta San Juan">Royal Sonesta San Juan</option>
+            </select>
+        </div>
 
-    <label>Accommodation Dates:
-      <input name="accommodation_dates" required>
-    </label>
+        <!-- Auto-filled address -->
+        <div class="form-group">
+            <label for="hotel_address">Hotel Address:</label>
+            <input type="text" id="hotel_address" name="hotel_address" class="address-field" readonly>
+            <div class="auto-fill-note">Auto-filled based on hotel selection</div>
+        </div>
 
-    <label>Room Types:
-      <input name="room_types" required>
-    </label>
+        <!-- Auto-filled legal entity -->
+        <div class="form-group">
+            <label for="company_legal_name">Hotel Legal Entity:</label>
+            <input type="text" id="company_legal_name" name="company_legal_name" class="legal-field" readonly>
+            <div class="auto-fill-note">Auto-filled based on hotel selection</div>
+        </div>
 
-    <label>Check-In Time:
-      <input type="Time" name="check_in_time" required>
-    </label>
+        <!-- Stay details -->
+        <div class="form-group">
+            <label for="nights">Number of Nights:</label>
+            <input type="number" id="nights" name="nights" min="1">
+        </div>
 
-   <label>Check-In Date:
-	<input type="date" name="check_in_date" required>
-	</label>
+        <div class="form-group">
+            <label for="room_types">Room Type:</label>
+            <input type="text" id="room_types" name="room_types" placeholder="e.g., Queen Deluxe">
+        </div>
 
-    <label>Check-Out Time:
-      <input type="Time" name="check_out_time" required>
-    </label>
+        <div class="form-group">
+            <label for="check_in_date">Check-in Date:</label>
+            <input type="date" id="check_in_date" name="check_in_date">
+        </div>
 
-    <label>Check-Out Date:
-      <input type="date" name="check_out_date" required>
-    </label>
+        <div class="form-group">
+            <label for="check_in_time">Check-in Time:</label>
+            <input type="time" id="check_in_time" name="check_in_time">
+        </div>
 
-    <label>Social Media Handles:
-      <input name="social_media_handles" required>
-    </label>
+        <div class="form-group">
+            <label for="check_out_date">Check-out Date:</label>
+            <input type="date" id="check_out_date" name="check_out_date">
+        </div>
 
-    <label>Term Dates:
-      <input name="term_dates" required>
-    </label>
+        <div class="form-group">
+            <label for="check_out_time">Check-out Time:</label>
+            <input type="time" id="check_out_time" name="check_out_time">
+        </div>
 
-    <label>Hotel Name:
-      <input name="hotel_name" required>
-    </label>
+        <!-- Social and program -->
+        <div class="form-group">
+            <label for="social_media_handles">Social Media Handles:</label>
+            <input type="text" id="social_media_handles" name="social_media_handles" placeholder="e.g., @KarinaSmith">
+        </div>
 
-    <label>Hotel Address:
-      <input name="hotel_address" required>
-    </label>
+        <div class="form-group">
+            <label for="term_dates">Term Dates:</label>
+            <input type="text" id="term_dates" name="term_dates" placeholder="e.g., Perpetual">
+        </div>
 
-    <label>Program Name:
-      <input name="program_name" required>
-    </label>
+        <div class="form-group">
+            <label for="program_name">Program Name:</label>
+            <input type="text" id="program_name" name="program_name" placeholder="e.g., Sonesta Stay">
+        </div>
 
-    <label>Min Posts Per Day:
-      <input type="Number" name="min_posts_per_day" required>
-    </label>
+        <!-- Posts and timing -->
+        <div class="form-group">
+            <label for="min_posts_per_day">Minimum Posts per Day:</label>
+            <input type="number" id="min_posts_per_day" name="min_posts_per_day" min="1">
+        </div>
 
-    <label>Pre-Post Days (optional):
-      <input type="Number" name="pre_post_days">
-    </label>
+        <div class="form-group">
+            <label for="pre_post_days">Pre/Post Days:</label>
+            <input type="number" id="pre_post_days" name="pre_post_days" min="0">
+        </div>
 
-    <label>Hotel Handle:
-      <input name="hotel_handle" required>
-    </label>
+        <!-- Features and promos -->
+        <div class="form-group">
+            <label for="features">Hotel Features:</label>
+            <textarea id="features" name="features" placeholder="e.g., Ocean views, rooftop bar, pet-friendly"></textarea>
+        </div>
 
-    <label>Brand Handle:
-      <input name="brand_handle" required>
-    </label>
+        <div class="form-group">
+            <label for="promotions">Hotel Promotions:</label>
+            <textarea id="promotions" name="promotions" placeholder="e.g., Stay 3 nights, get the 4th free"></textarea>
+        </div>
 
-    <label>Company Handle:
-      <input name="company_handle" required>
-    </label>
+        <!-- Handles and hashtag -->
+        <div class="form-group">
+            <label for="hotel_handle">Hotel Handle:</label>
+            <input type="text" id="hotel_handle" name="hotel_handle" placeholder="e.g., @SonestaLAX">
+        </div>
 
-    <label>Campaign Hashtag:
-      <input name="campaign_hashtag" required>
-    </label>
+        <div class="form-group">
+            <label for="brand_handle">Brand Handle:</label>
+            <input type="text" id="brand_handle" name="brand_handle" placeholder="e.g., @ESSuites">
+        </div>
 
-    <label>Confidentiality Term (Years):
-      <input name="conf_years" required>
-    </label>
+        <div class="form-group">
+            <label for="company_handle">Company Handle:</label>
+            <input type="text" id="company_handle" name="company_handle" placeholder="e.g., @Sonesta">
+        </div>
 
-    <button type="submit">Generate Word Doc</button>
-  </form>
-</body>
-</html>
+        <div class="form-group">
+            <label for="campaign_hashtag">Campaign Hashtag:</label>
+            <input type="text" id="campaign_hashtag" name="campaign_hashtag" placeholder="e.g., #SonestaStay">
+        </div>
 
+        <!-- Confidentiality -->
+        <div class="form-group">
+            <label for="conf_years">Confidentiality Years:</label>
+            <input type="number" id="conf_years" name="conf_years">
+        </div>
+
+        <!-- Hidden field for auto-filled accommodation dates -->
+        <input type="hidden" id="accommodation_dates" name="accommodation_dates">
+
+        <button type="submit" class="submit-btn">Generate Agreement</button>
+    </form>
+</div>
+
+<script>
+    // Keep JS values aligned with your Flask HOTEL_CONFIG
+    function updateHotelFields() {
+        const hotelSelect = document.getElementById('hotel_name');
+        const addressField = document.getElementById('hotel_address');
+        const legalField = document.getElementById('company_legal_name');
+
+        const hotelData = {
+            'Sonesta Redondo Beach & Marina': {
+                address: '300 North Harbor Drive Redondo Beach, CA 90277',
+                legal: 'SONESTA REDONDO BEACH LLC'
+            },
+            'The Allegro Royal Sonesta Hotel': {
+                address: '171 West Randolph Street Chicago, IL 60601',
+                legal: 'SONESTA CHICAGO LLC'
+            },
+            'The Clift Royal Sonesta Hotel': {
+                address: '495 Geary Street San Francisco, CA 94102',
+                legal: 'Sonesta Clift LLC'
+            },
+            'Royal Sonesta Chicago Riverfront': {
+                address: '71 East Wacker Drive Chicago, IL 60601',
+                legal: 'Sonesta Chicago LLC'
+            },
+            'Royal Sonesta Chicago River North': {
+                address: '505 North State Street Chicago, IL 60654',
+                legal: 'Sonesta State Street LLC'
+            },
+            'Sonesta Hamilton Park Morristown': {
+                address: '175 Park Avenue Florham Park, NJ 07932',
+                legal: 'Sonesta NJ LLC'
+            },
+            'Sonesta Simply Suites Jersey City': {
+                address: '21 2nd Street Jersey City, NJ 07302',
+                legal: 'Sonesta Jersey City LLC'
+            },
+            'Sonesta Simply Suites Parsippany Morris Plains': {
+                address: '100 Candlewood Drive Morris Plains, NJ 07950',
+                legal: 'Sonesta Morris Plains LLC'
+            },
+            'Sonesta ES Suites Parsippany Morris Plains': {
+                address: '3 Gatehall Drive Parsippany-Troy Hills, NJ 07054',
+                legal: 'Sonesta Gatehall Drive LLC'
+            },
+            'Sonesta Simply Suites Nanuet': {
+                address: '20 Overlook Boulevard Nanuet, NY 10954',
+                legal: 'Sonesta Nanuet LLC'
+            },
+            'The Yorkville Royal Sonesta Hotel': {
+                address: '220 Bloor Street West Toronto, ON M5S 1T8',
+                legal: 'Sonesta Toronto ULC'
+            },
+            'Sonesta ES Suites Toronto': {
+                address: '355 South Park Road Thornhill, ON L3T 7W2',
+                legal: 'Sonesta Canada ULC'
+            },
+            'Royal Sonesta San Juan': {
+                address: '5961 Isla Verde Avenue San Juan, PR 00979',
+                legal: 'Sonesta San Juan LLC'
+            }
+        };
+
+        const selectedHotel = hotelSelect.value;
+        if (hotelData[selectedHotel]) {
+            addressField.value = hotelData[selectedHotel].address;
+            legalField.value = hotelData[selectedHotel].legal;
+        } else {
+            addressField.value = '';
+            legalField.value = '';
+        }
+    }
+
+     // Auto-populate check-out date based on check-in + nights
+    function updateCheckoutDate() {
+        const checkInInput = document.getElementById("check_in_date");
+        const nightsInput = document.getElementById("nights");
+        const checkOutInput = document.getElementById("check_out_date");
+
+        const checkInDate = checkInInput.value;
+        const nights = parseInt(nightsInput.value);
+
+        if (checkInDate && !isNaN(nights) && nights > 0) {
+            let inDate = new Date(checkInDate);
+            // Add nights in days (1 night = next day)
+            inDate.setDate(inDate.getDate() + nights);
+            checkOutInput.value = inDate.toISOString().split("T")[0];
+        }
+    }
+
+    // Format accommodation dates when check-in/out/time changes
+    function formatAccommodationDates() {
+        const checkInDate = document.getElementById("check_in_date").value;
+        const checkOutDate = document.getElementById("check_out_date").value;
+        const checkInTime = document.getElementById("check_in_time").value;
+        const checkOutTime = document.getElementById("check_out_time").value;
+
+        if (checkInDate && checkOutDate && checkInTime && checkOutTime) {
+            const checkIn = new Date(checkInDate);
+            const checkOut = new Date(checkOutDate);
+
+            const optionsFull = { year: 'numeric', month: 'long', day: 'numeric' };
+            const optionsShort = { month: 'long', day: 'numeric' };
+
+            const inDateFormatted = checkIn.toLocaleDateString('en-US', optionsFull);
+            const outDateFormatted = checkOut.toLocaleDateString('en-US', optionsFull);
+
+            const rangeFormatted = `${checkIn.toLocaleDateString('en-US', optionsShort)}–${checkOut.getDate()}, ${checkOut.getFullYear()}`;
+
+            const inTimeFormatted = new Date(`1970-01-01T${checkInTime}`).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+            const outTimeFormatted = new Date(`1970-01-01T${checkOutTime}`).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+
+            const summary = `Check-in at ${inTimeFormatted} on ${inDateFormatted}.\nCheck-out at ${outTimeFormatted} on ${outDateFormatted}.\n${rangeFormatted}`;
+
+            document.getElementById("accommodation_dates").value = summary;
+        }
+    }
+
+    // Event bindings
+    document.getElementById("check_in_date").addEventListener("change", updateCheckoutDate);
+    document.getElementById("nights").addEventListener("input", updateCheckoutDate);
+
+    ["check_in_date", "check_out_date", "check_in_time", "check_out_time"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener("change", formatAccommodationDates);
+    });
+</script>
