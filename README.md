@@ -23,9 +23,7 @@
 
 ## ✅ 2. **Activate it**
 
-* Powershell:
-
   ```powershell
-  cd C:\Users\slamb\PythonProjects\Influencer_Agreement_Generator
+  cd C:\Users\\PythonProjects\Influencer_Agreement_Generator #USE YOUR EXACT PROJECT FOLDER PATH
   python .\influencer_app.py
 
