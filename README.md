@@ -17,7 +17,7 @@
 | ------------------------------------ | -------------------------------------- |
 | `app.py`                             | Your main Python Flask app             |
 | `Influencer_Agreement_Template.docx` | Your Word template with placeholders   |
-| `templates/form.html` *(optional)*   | HTML form (if not using inline string) |
+| `templates/form.html` *(optional)*   | HTML form (end user form to generate contract )|
 ---
 ```
 
